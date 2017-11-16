@@ -1,4 +1,7 @@
 
+const pageProfiles = getProfiles();
+
+
 const faceData = [
     {
         "x": 28.71,
@@ -34,8 +37,22 @@ $('body').append($('<div id="tooltip">'));
 
 // true if numbers are nearly equal
 function nearly(n, m) {
-    const delta = 10;
+    const delta = 5;
     return Math.abs(n - m) < delta;
+}
+
+
+// return all profile data found in current page
+function getProfiles() {
+    const sel = '[itemtype="https://schema.org/Person"] a';
+    return _.map($(sel), function (el) {
+        return {
+            target: el,
+            href: el.href,
+            name: el.innerText,
+            profile: el.href.match(/\w+\-\d+.*$/)[0]
+        };
+    });
 }
 
 
@@ -50,10 +67,15 @@ function onMouseMove(e) {
 
     const faceItem = _.find(faceData, match);
     if (faceItem) {
+
+        function f(item) {
+            return item.profile==faceItem.profile;
+        }
+
         $('#tooltip').show();
-        $('#tooltip').text(faceItem.profile);
-        $('#tooltip').css('left', (e.clientX+20) + 'px');
-        $('#tooltip').css('top', (e.clientY+20) + 'px');
+        $('#tooltip').text(_.find(pageProfiles, f)['name']);
+        $('#tooltip').css('left', (e.clientX + 20) + 'px');
+        $('#tooltip').css('top', (e.clientY + 20) + 'px');
     }
     else {
         $('#tooltip').hide();
