@@ -52,8 +52,8 @@ function onMouseMove(e) {
     if (faceItem) {
         $('#tooltip').show();
         $('#tooltip').text(faceItem.profile);
-        $('#tooltip').css('left', (e.pageX+20) + 'px');
-        $('#tooltip').css('top', (e.pageY+20) + 'px');
+        $('#tooltip').css('left', (e.clientX+20) + 'px');
+        $('#tooltip').css('top', (e.clientY+20) + 'px');
     }
     else {
         $('#tooltip').hide();
