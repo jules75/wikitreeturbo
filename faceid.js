@@ -72,13 +72,18 @@ function onMouseMove(e) {
             return item.profile==faceItem.profile;
         }
 
+        const profile = _.find(pageProfiles, f);
+
+        $(profile.target).addClass('highlight');
+
         $('#tooltip').show();
-        $('#tooltip').text(_.find(pageProfiles, f)['name']);
+        $('#tooltip').text(profile.name);
         $('#tooltip').css('left', (e.clientX + 20) + 'px');
         $('#tooltip').css('top', (e.clientY + 20) + 'px');
     }
     else {
         $('#tooltip').hide();
+        _.map(pageProfiles, function(p) { $(p.target).removeClass('highlight')});
     }
 }
 

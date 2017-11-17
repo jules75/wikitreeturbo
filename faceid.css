@@ -7,3 +7,9 @@
 	padding: 2px 5px;
 	border: 1px solid black;
 }
+
+.highlight {
+	background-color: yellow;
+	border: 2px solid red;
+	font-weight: bold;
+}
