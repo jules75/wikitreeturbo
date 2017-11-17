@@ -1,34 +1,6 @@
 
 const pageProfiles = getProfiles();
-
-
-const faceData = [
-    {
-        "x": 28.71,
-        "y": 37.64,
-        "profile": "Lacey-1616"
-    },
-    {
-        "x": 41.24,
-        "y": 28.16,
-        "profile": "Laffey-101"
-    },
-    {
-        "x": 60.99,
-        "y": 33.05,
-        "profile": "Parrot-128"
-    },
-    {
-        "x": 47.86,
-        "y": 43.96,
-        "profile": "Dunn-10271"
-    },
-    {
-        "x": 67.20,
-        "y": 56.61,
-        "profile": "Laffey-98"
-    }
-];
+let faceData;
 
 
 // create tooltip
@@ -53,6 +25,23 @@ function getProfiles() {
             profile: el.href.match(/\w+\-\d+.*$/)[0]
         };
     });
+}
+
+
+// returns face data if found in comments on page
+// first comment block found is returned
+// returns null if nothing found
+function getFaceData() {
+    
+    const divs = $('[itemprop="commentText"]');
+
+    try {
+        return JSON.parse(divs[0].innerText).faceIdData;
+    }
+    catch (err) {
+        console.error(err);
+        return null;
+    }
 }
 
 
@@ -88,4 +77,9 @@ function onMouseMove(e) {
 }
 
 
-$("img[itemprop='image']").on('mousemove', onMouseMove);
+// initialise
+if (getFaceData()) {
+    faceData = getFaceData();
+    $("img[itemprop='image']").on('mousemove', onMouseMove);
+}
+
