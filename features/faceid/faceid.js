@@ -1,4 +1,11 @@
 
+/*
+ * See people's names when hovering over group photos.
+ * Name/position data is stored in comments on page.
+ * See https://www.wikitree.com/photo/jpg/Lacey-1616 for an example.
+ */
+
+
 const pageProfiles = getProfiles();
 let faceData;
 
@@ -36,7 +43,7 @@ function getFaceData() {
     const divs = $('[itemprop="commentText"]');
 
     try {
-        return JSON.parse(divs[0].innerText).faceIdData;
+        return JSON.parse(divs[0].innerText).wikiTreeTurbo.faceId;
     }
     catch (err) {
         console.error(err);
@@ -59,7 +66,7 @@ function onMouseMove(e) {
     if (faceItem) {
 
         function f(item) {
-            return item.profile==faceItem.profile;
+            return item.profile==faceItem.p;
         }
 
         const profile = _.find(pageProfiles, f);
