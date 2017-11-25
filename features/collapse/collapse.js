@@ -9,24 +9,34 @@ function toggleCollapse(e) {
 }
 
 function isNextSiblingDiv(el) {
-
     if(el.nextElementSibling) {
         if (el.nextElementSibling.tagName=="DIV") {
             return true;
         }
     }
-
     return false;
 }
 
 function createButton(n, li) {
-    if (isNextSiblingDiv(li)) {
-        const button = $("<button>-</button>");
-        $(button).click(toggleCollapse);
-        $(li).prepend(button);
-    }
-}
 
+    // attach class to avoid adding button more than once
+    if (li.classList.contains('collapse')) {
+        return;
+    }
+
+    if (!isNextSiblingDiv(li)) {
+        return;
+    }
+
+    $(li).addClass('collapse');
+    const button = $("<button>-</button>");
+    $(button).click(toggleCollapse);
+    $(li).prepend(button);
+}
 
 $('ol li').each(createButton);
 
+// in case content is added dynamically
+$(document).bind("DOMSubtreeModified", function() {
+    $('ol li').each(createButton);
+});
