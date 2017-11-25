@@ -40,6 +40,7 @@ function getFaceData() {
     }
     catch (err) {
         console.error(err);
+        console.log("No comment found with valid faceId JSON data inside");
         return null;
     }
 }

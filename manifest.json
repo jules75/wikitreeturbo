@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "WikiTree FaceID",
-  "description": "Match faces in WikiTree photos to their profiles",
+  "name": "WikiTree Turbo",
+  "description": "Additional features for WikiTree genealogy site.",
   "version": "0.1",
   "author": "julianlaffey@gmail.com",
   "browser_action": {
@@ -10,15 +10,28 @@
   "content_scripts": [
     {
       "css": [
-        "faceid.css"
+        "features/faceid/faceid.css"
       ],
       "js": [
         "lib/lodash.js",
         "lib/jquery-3.2.1.min.js",
-        "faceid.js"
+        "features/faceid/faceid.js"
       ],
       "matches": [
         "https://www.wikitree.com/photo/*"
+      ]
+    },
+    {
+      "css": [
+        "features/collapse/collapse.css"
+      ],
+      "js": [
+        "lib/lodash.js",
+        "lib/jquery-3.2.1.min.js",
+        "features/collapse/collapse.js"
+      ],
+      "matches": [
+        "https://www.wikitree.com/*"
       ]
     }
   ]
