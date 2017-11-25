@@ -18,7 +18,7 @@
         "features/faceid/faceid.js"
       ],
       "matches": [
-        "https://www.wikitree.com/photo/*"
+        "https://*.wikitree.com/photo/*"
       ]
     },
     {
@@ -31,7 +31,7 @@
         "features/collapse/collapse.js"
       ],
       "matches": [
-        "https://www.wikitree.com/*"
+        "https://*.wikitree.com/*"
       ]
     }
   ]
