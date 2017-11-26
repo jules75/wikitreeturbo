@@ -35,12 +35,31 @@ function getProfiles() {
 }
 
 
+// returns true if element's text is valid WTT encoded JSON
+function isWikiTreeTurboJSON(element) {
+    try {
+        const o = JSON.parse(element.innerText);
+        return o.hasOwnProperty('wikiTreeTurbo');
+    }
+    catch (err) {
+        return false;
+    }
+}
+
+
+// returns all comments in current page that contain WTT JSON
+function getWikiTreeTurboComments() {
+    const divs = $('[itemprop="commentText"]');
+    return _.filter(_.toArray(divs), isWikiTreeTurboJSON);
+}
+
+
 // returns face data if found in comments on page
 // first comment block found is returned
 // returns null if nothing found
 function getFaceData() {
-    
-    const divs = $('[itemprop="commentText"]');
+
+    const divs = getWikiTreeTurboComments();
 
     try {
         return JSON.parse(divs[0].innerText).wikiTreeTurbo.faceId;
