@@ -66,7 +66,7 @@ function getFaceData() {
     }
     catch (err) {
         console.error(err);
-        console.log("No comment found with valid faceId JSON data inside");
+        console.log("WikiTreeTurbo: no comments found containing valid faceId JSON data");
         return null;
     }
 }
@@ -104,9 +104,16 @@ function onMouseMove(e) {
 }
 
 
-// initialise
-if (getFaceData()) {
-    faceData = getFaceData();
-    $("img[itemprop='image']").on('mousemove', onMouseMove);
+function init() {
+
+    _.map(getWikiTreeTurboComments(), function(i) { $(i).addClass('containsJSON'); });
+
+    if (getFaceData()) {
+        faceData = getFaceData();
+        $("img[itemprop='image']").on('mousemove', onMouseMove);
+    }
 }
+
+
+init();
 

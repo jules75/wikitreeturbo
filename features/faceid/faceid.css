@@ -13,3 +13,9 @@
 	border: 2px solid red;
 	font-weight: bold;
 }
+
+.containsJSON, .containsJSON * {
+	color: #777;
+	background-color: white;
+	font-family: monospace;
+}
