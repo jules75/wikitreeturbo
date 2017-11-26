@@ -29,7 +29,7 @@ function createButton(n, li) {
     }
 
     $(li).addClass('collapse');
-    const button = $("<button>-</button>");
+    const button = $("<button class='wikitreeturbo'>-</button>");
     $(button).click(toggleCollapse);
     $(li).prepend(button);
 }
