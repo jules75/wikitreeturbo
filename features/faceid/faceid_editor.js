@@ -21,6 +21,11 @@ function update() {
 }
 
 
+function wrap(data) {
+    return JSON.stringify({wikiTreeTurbo: {faceId: data}});
+}
+
+
 function updateUI() {
 
     $(elements.profileMessage).hide();
@@ -41,7 +46,7 @@ function updateUI() {
     }
 
     $(elements.tagButton).text(state.isEditing ? "Done tagging" : "Tag people in this photo");
-    $(elements.resultCode).children('pre').eq(0).text(JSON.stringify(faceIdData));
+    $(elements.resultCode).children('pre').eq(0).text(wrap(faceIdData));
 }
 
 
