@@ -37,6 +37,7 @@ function updateUI() {
         }
         else if (x < 0 && y < 0) {
             $(elements.photoMessage).show();
+            $(elements.photoMessage).children('span').eq(0).text(name);
         }
     }
     else {
@@ -113,7 +114,7 @@ function createUIComponents() {
     $(elements.profileMessage).hide();
     $('ul.STYLED').first().prepend(elements.profileMessage);
 
-    elements.photoMessage = $("<p class='pulse'>Select their face in the photo</p>");
+    elements.photoMessage = $("<p class='pulse'>Select <span>person</span>'s face in the photo</p>");
     $(elements.photoMessage).hide();
     $("img[itemprop='image']").parent().parent().prepend(elements.photoMessage);
 
