@@ -5,10 +5,10 @@
 
 var state = { isEditing: false, faceIdData: [] };
 var profile, name, x, y;
-var elements = { tagButton: null, profileMessage: null, photoMessage: null, resultCode: null };
+var elements = { tagButton: null, profileMessage: null, photoMessage: null };
 
 
-function resetState() {
+function resetUserSelection() {
     profile = name = "";
     x = y = -1;
 }
@@ -41,12 +41,13 @@ function updateUI() {
     }
     else {
         if (state.faceIdData.length > 0) {
-            $(elements.resultCode).show();
+            $(elements.tagButton).hide();
+            $('textarea').text(wrap(state.faceIdData));         // populate textarea
+            $('input[value="Save Comment"]').trigger('click');  // submit form
         }
     }
 
-    $(elements.tagButton).text(state.isEditing ? "----- Done tagging -----" : "Tag people in this photo");
-    $(elements.resultCode).children('pre').eq(0).text(wrap(state.faceIdData));
+    $(elements.tagButton).text(state.isEditing ? "-- Done tagging, save --" : "Tag people in this photo");
 
     const s = wrap(state.faceIdData);
     if (s.length > 800) {
@@ -59,7 +60,7 @@ function updateUI() {
 function updateState() {
     if (profile != "" && x >= 0 && y >= 0) {
         state.faceIdData.push({ 'x': x, 'y': y, 'p': profile });
-        resetState();
+        resetUserSelection();
     }
 }
 
@@ -93,7 +94,7 @@ function toggleEditing(e) {
     if (state.isEditing) {
         createListeners();
     }
-    resetState();
+    resetUserSelection();
     update();
 }
 
@@ -114,21 +115,6 @@ function createUIComponents() {
 
     elements.photoMessage = $("<p class='pulse'>Select <span>person</span>'s face in the photo</p>");
     $("img[itemprop='image']").parent().parent().prepend(elements.photoMessage);
-
-    elements.resultCode = $(`
-        <div id="result">
-        <div>
-        <p>To complete the process:</p>
-        <ol>
-        <li>Copy the block of code on the right</li>
-        <li>Paste it into the 'Add comment' box on this page</li>
-        <li>Submit the comment</li>
-        </ol>
-        </div>
-        <pre></pre>
-    `);
-    $(elements.resultCode).hide();
-    $('body').append(elements.resultCode);
 
 }
 
