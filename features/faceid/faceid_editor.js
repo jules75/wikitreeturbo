@@ -28,15 +28,15 @@ function wrap(data) {
 
 function updateUI() {
 
-    $(elements.profileMessage).hide();
-    $(elements.photoMessage).hide();
+    $(elements.profileMessage).addClass('hidden');
+    $(elements.photoMessage).addClass('hidden');
 
     if (state.isEditing) {
         if (profile == "") {
-            $(elements.profileMessage).show();
+            $(elements.profileMessage).removeClass('hidden');
         }
         else if (x < 0 && y < 0) {
-            $(elements.photoMessage).show();
+            $(elements.photoMessage).removeClass('hidden');
             $(elements.photoMessage).children('span').eq(0).text(name);
         }
     }
@@ -119,11 +119,9 @@ function createUIComponents() {
     $("img[itemprop='image']").parent().parent().prepend(elements.tagButton);
 
     elements.profileMessage = $("<li class='pulse'>Select the person below you want to tag</li>");
-    $(elements.profileMessage).hide();
     $('ul.STYLED').first().prepend(elements.profileMessage);
 
     elements.photoMessage = $("<p class='pulse'>Select <span>person</span>'s face in the photo</p>");
-    $(elements.photoMessage).hide();
     $("img[itemprop='image']").parent().parent().prepend(elements.photoMessage);
 
     elements.resultCode = $(`
