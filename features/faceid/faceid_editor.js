@@ -73,8 +73,10 @@ function onProfileClick(e) {
 
 
 function onImageClick(e) {
-    x = e.originalEvent.offsetX / e.target.width * 100;
-    y = e.originalEvent.offsetY / e.target.height * 100;
+    x1 = e.originalEvent.offsetX / e.target.width * 100;
+    y1 = e.originalEvent.offsetY / e.target.height * 100;
+    x = Number(x1.toFixed(2));
+    y = Number(y1.toFixed(2));
     update();
     e.preventDefault();
 }
