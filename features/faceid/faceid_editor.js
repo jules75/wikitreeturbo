@@ -3,8 +3,7 @@
  */
 
 
-var faceIdData = [];    // built up as user selects names/faces
-var state = { isEditing: false };
+var state = { isEditing: false, faceIdData: [] };
 var profile, name, x, y;
 var elements = { tagButton: null, profileMessage: null, photoMessage: null, resultCode: null };
 
@@ -41,15 +40,15 @@ function updateUI() {
         }
     }
     else {
-        if (faceIdData.length > 0) {
+        if (state.faceIdData.length > 0) {
             $(elements.resultCode).show();
         }
     }
 
-    $(elements.tagButton).text(state.isEditing ? "Done tagging" : "Tag people in this photo");
-    $(elements.resultCode).children('pre').eq(0).text(wrap(faceIdData));
+    $(elements.tagButton).text(state.isEditing ? "----- Done tagging -----" : "Tag people in this photo");
+    $(elements.resultCode).children('pre').eq(0).text(wrap(state.faceIdData));
 
-    const s = wrap(faceIdData);
+    const s = wrap(state.faceIdData);
     if (s.length > 800) {
         alert("ERROR: CANNOT CONTINUE. Too much face data for wikitree.com to store.");
         $(elements.tagButton).hide();
@@ -59,7 +58,7 @@ function updateUI() {
 
 function updateState() {
     if (profile != "" && x >= 0 && y >= 0) {
-        faceIdData.push({ 'x': x, 'y': y, 'p': profile });
+        state.faceIdData.push({ 'x': x, 'y': y, 'p': profile });
         resetState();
     }
 }
@@ -88,19 +87,11 @@ function onImageClick(e) {
 }
 
 
-function destroyListeners() {
-
-}
-
-
 function toggleEditing(e) {
     state.isEditing = !state.isEditing;
 
     if (state.isEditing) {
         createListeners();
-    }
-    else {
-
     }
     resetState();
     update();
@@ -118,7 +109,7 @@ function createUIComponents() {
     elements.tagButton = $("<button class='simple'></button>");
     $("img[itemprop='image']").parent().parent().prepend(elements.tagButton);
 
-    elements.profileMessage = $("<li class='pulse'>Select the person below you want to tag</li>");
+    elements.profileMessage = $("<li class='pulse'>Select the name of the person you want to tag below</li>");
     $('ul.STYLED').first().prepend(elements.profileMessage);
 
     elements.photoMessage = $("<p class='pulse'>Select <span>person</span>'s face in the photo</p>");
@@ -130,8 +121,8 @@ function createUIComponents() {
         <p>To complete the process:</p>
         <ol>
         <li>Copy the block of code on the right</li>
-        <li>Paste it into the 'Add comment' box on this page and submit</li>
-        <li>Refresh the page</li>
+        <li>Paste it into the 'Add comment' box on this page</li>
+        <li>Submit the comment</li>
         </ol>
         </div>
         <pre></pre>
