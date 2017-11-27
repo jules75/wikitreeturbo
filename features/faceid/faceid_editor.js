@@ -59,6 +59,11 @@ function updateState() {
 
 
 function onProfileClick(e) {
+    
+    if (profile=="") {
+        $(e.target).addClass('clicked');
+    }
+
     name = e.target.innerText;
     profile = e.target.href.match(/\w+\-\d+.*$/)[0];
     update();

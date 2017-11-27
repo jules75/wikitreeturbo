@@ -70,3 +70,7 @@ button.simple {
 	animation: fadeIn 0.5s infinite alternate; 
 }
 
+.clicked {
+	opacity: 0.5;
+	text-decoration: line-through !important;
+}
