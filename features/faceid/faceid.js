@@ -65,7 +65,7 @@ function getFaceData() {
         return JSON.parse(divs[0].innerText).wikiTreeTurbo.faceId;
     }
     catch (err) {
-        console.error(err);
+        // console.error(err);
         console.log("WTT: no comments found containing valid faceId JSON data");
         return null;
     }

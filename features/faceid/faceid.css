@@ -1,3 +1,7 @@
+.hidden {
+	display: none;
+}
+
 #tooltip {
 	position: fixed;
 	color: black;
@@ -35,3 +39,29 @@
 	font-family: mono;
 	color: white;
 }
+
+button.simple {
+	color: black;
+	background-color: #ccc;
+	border: 1px solid #aaa;
+	padding: 5px;
+	text-transform: none;
+	font-size: 12pt;
+	margin-bottom: 10px;
+}
+
+/* from http://stackoverflow.com/a/31458204 */
+@keyframes fadeIn { 
+	from { 
+		opacity: 0; 
+	} 
+}
+.pulse { 
+	color: yellow;
+	background: red;
+	padding: 5px;
+	border-radius: 5px;
+	text-align: center;
+	animation: fadeIn 0.5s infinite alternate; 
+}
+
