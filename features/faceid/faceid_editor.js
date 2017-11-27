@@ -48,6 +48,12 @@ function updateUI() {
 
     $(elements.tagButton).text(state.isEditing ? "Done tagging" : "Tag people in this photo");
     $(elements.resultCode).children('pre').eq(0).text(wrap(faceIdData));
+
+    const s = wrap(faceIdData);
+    if (s.length > 800) {
+        alert("ERROR: CANNOT CONTINUE. Too much face data for wikitree.com to store.");
+        $(elements.tagButton).hide();
+    }
 }
 
 
