@@ -4,9 +4,9 @@
 
 
 var faceIdData = [];    // built up as user selects names/faces
-var state = {isEditing: false};
+var state = { isEditing: false };
 var profile, name, x, y;
-var elements = {profileMessage: null, photoMessage: null};
+var elements = { tagButton: null, profileMessage: null, photoMessage: null, resultCode: null };
 
 
 function resetState() {
@@ -22,24 +22,32 @@ function update() {
 
 
 function updateUI() {
-    
-    console.log(faceIdData);
 
     $(elements.profileMessage).hide();
     $(elements.photoMessage).hide();
 
-    if (profile == "") {
-        $(elements.profileMessage).show();
+    if (state.isEditing) {
+        if (profile == "") {
+            $(elements.profileMessage).show();
+        }
+        else if (x < 0 && y < 0) {
+            $(elements.photoMessage).show();
+        }
     }
-    else if (x<0 && y<0) {
-        $(elements.photoMessage).show();
+    else {
+        if (faceIdData.length > 0) {
+            $(elements.resultCode).show();
+        }
     }
+
+    $(elements.tagButton).text(state.isEditing ? "Done tagging" : "Tag people in this photo");
+    $(elements.resultCode).children('pre').eq(0).text(JSON.stringify(faceIdData));
 }
 
 
 function updateState() {
-    if (profile != "" && x>=0 && y>=0) {
-        faceIdData.push({'x': x, 'y': y, 'p': profile});
+    if (profile != "" && x >= 0 && y >= 0) {
+        faceIdData.push({ 'x': x, 'y': y, 'p': profile });
         resetState();
     }
 }
@@ -61,45 +69,62 @@ function onImageClick(e) {
 }
 
 
+function destroyListeners() {
+
+}
+
+
+function toggleEditing(e) {
+    state.isEditing = !state.isEditing;
+
+    if (state.isEditing) {
+        createListeners();
+    }
+    else {
+
+    }
+    resetState();
+    update();
+}
+
+
 function createListeners() {
     $('[itemtype="https://schema.org/Person"] a').click(onProfileClick);
     $("img[itemprop='image']").click(onImageClick);
 }
 
 
-function destroyListeners() {
+function createUIComponents() {
 
-}
+    elements.tagButton = $("<button class='simple'></button>");
+    $("img[itemprop='image']").parent().parent().prepend(elements.tagButton);
 
-
-function initEditor() {
-
-    createListeners();
-    
-    elements.profileMessage = $("<li class='pulse hidden'>Select the person below you want to tag</li>");
+    elements.profileMessage = $("<li class='pulse'>Select the person below you want to tag</li>");
+    $(elements.profileMessage).hide();
     $('ul.STYLED').first().prepend(elements.profileMessage);
 
-    elements.photoMessage = $("<p class='pulse hidden'>Select their face in the photo</p>");
+    elements.photoMessage = $("<p class='pulse'>Select their face in the photo</p>");
+    $(elements.photoMessage).hide();
     $("img[itemprop='image']").parent().parent().prepend(elements.photoMessage);
 
-    resetState();
-    update();
+    elements.resultCode = $(`
+        <div id="result">
+        <div>
+        <p>To complete the process:</p>
+        <ol>
+        <li>Copy the block of code on the right</li>
+        <li>Paste it into the 'Add comment' box on this page and submit</li>
+        <li>Refresh the page</li>
+        </ol>
+        </div>
+        <pre></pre>
+    `);
+    $(elements.resultCode).hide();
+    $('body').append(elements.resultCode);
+
 }
 
 
-function toggleEditing(e) {
-    state.isEditing = !state.isEditing;
-    console.log("editing=", state.isEditing);
-    initEditor();
-    update();
-}
-
-
-function createEditorButton() {
-    const btn = $("<button class='simple'>Tag people in this photo</button>");
-    $(btn).click(toggleEditing);
-    $("img[itemprop='image']").parent().parent().prepend(btn);
-}
-
-
-createEditorButton();
+createUIComponents();
+$(elements.tagButton).click(toggleEditing);
+update();
