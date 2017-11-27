@@ -16,7 +16,8 @@
       "js": [
         "lib/lodash.js",
         "lib/jquery-3.2.1.min.js",
-        "features/faceid/faceid.js"
+        "features/faceid/faceid.js",
+        "features/faceid/faceid_editor.js"
       ],
       "matches": [
         "https://*.wikitree.com/photo/*"
