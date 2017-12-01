@@ -28,6 +28,12 @@ function isMatch(s, o) {
 
 
 function onInputChange(e) {
+
+    if (profiles == null) {
+        alert('No watchlist data found. Please visit your watchlist page, then try again.');
+        return;
+    }
+
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
     renderMatches(_.pickBy(profiles, f));
@@ -57,24 +63,7 @@ function onKeyPress(e) {
 }
 
 
-// temporary function to build profile object from watchlist page
-function scrapeProfileData() {
-
-    function rf(result, value, key) {
-        const profile = value.href.match(/wiki\/(.*)$/)[1];
-        result[profile] = { 'name': value.innerText, 'url': value.href };
-        return result;
-    }
-
-    const links = $('table tr td:first-child a:first-child');
-    return _.reduce(links, rf, {});
-}
-
-
-// localStorage.setItem('wikitreeturbo_watchlist', JSON.stringify(scrapeProfileData()));
-
 createSearchPanel();
 
 $('#searchPanel input').on('input', onInputChange);
-
 $('body').keypress(onKeyPress);
