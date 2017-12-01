@@ -45,6 +45,18 @@ function createSearchPanel() {
 }
 
 
+function onKeyPress(e) {
+    
+    if (e.originalEvent.code !== 'Backquote') {
+        return;
+    }
+
+    $('#searchPanel').toggle();
+    $('#searchPanel input').focus();
+    e.preventDefault();
+}
+
+
 // temporary function to build profile object from watchlist page
 function scrapeProfileData() {
 
@@ -61,6 +73,8 @@ function scrapeProfileData() {
 
 // localStorage.setItem('wikitreeturbo_watchlist', JSON.stringify(scrapeProfileData()));
 
-// createSearchPanel();
+createSearchPanel();
 
-// $('#searchPanel input').on('input', onInputChange);
+$('#searchPanel input').on('input', onInputChange);
+
+$('body').keypress(onKeyPress);

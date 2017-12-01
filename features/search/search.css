@@ -1,11 +1,14 @@
 #searchPanel {
+    display: none;
     position: fixed;
+    top: 0;
     bottom: 0;
     left: 0;
-    width: 200px;
-    height: 500px;
+    width: 250px;
     background: #333;
     padding: 10px;
+    opacity: 0.95;
+    z-index: 9999;
 }
 
 #searchPanel input[type="text"] {
@@ -14,8 +17,18 @@
 
 #searchPanel ul {
     margin-left: 10px;
+    list-style-type: none;
 }
 
 #searchPanel ul * {
     color: #eee;
+}
+
+#searchPanel a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+#searchPanel a:focus, #searchPanel a:hover {
+    color: black;
 }
