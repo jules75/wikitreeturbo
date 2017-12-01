@@ -3,7 +3,7 @@
  */
 
 
-var state = { isEditing: false, faceIdData: [] };
+var state = { isEditing: false, faceIdObject: {} };
 var profile, name, x, y;
 var elements = { tagButton: null, profileMessage: null, photoMessage: null };
 
@@ -21,7 +21,7 @@ function update() {
 
 
 function wrap(data) {
-    return JSON.stringify({wikiTreeTurbo: {faceId: data}});
+    return JSON.stringify({ wikiTreeTurbo: { faceId: data } });
 }
 
 
@@ -40,16 +40,16 @@ function updateUI() {
         }
     }
     else {
-        if (state.faceIdData.length > 0) {
+        if (!_.isEmpty(state.faceIdObject)) {
             $(elements.tagButton).hide();
-            $('textarea').text(wrap(state.faceIdData));         // populate textarea
+            $('textarea').text(wrap(state.faceIdObject));       // populate textarea
             $('input[value="Save Comment"]').trigger('click');  // submit form
         }
     }
 
     $(elements.tagButton).text(state.isEditing ? "-- Done tagging, save --" : "Tag people in this photo");
 
-    const s = wrap(state.faceIdData);
+    const s = wrap(state.faceIdObject);
     if (s.length > 800) {
         alert("ERROR: CANNOT CONTINUE. Too much face data for wikitree.com to store.");
         $(elements.tagButton).hide();
@@ -59,15 +59,15 @@ function updateUI() {
 
 function updateState() {
     if (profile != "" && x >= 0 && y >= 0) {
-        state.faceIdData.push({ 'x': x, 'y': y, 'p': profile });
+        state.faceIdObject[profile] = { 'x': x, 'y': y };
         resetUserSelection();
     }
 }
 
 
 function onProfileClick(e) {
-    
-    if (profile=="") {
+
+    if (profile == "") {
         $(e.target).addClass('clicked');
     }
 

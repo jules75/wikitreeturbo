@@ -81,11 +81,11 @@ function onMouseMove(e) {
         return nearly(o.x, x) && nearly(o.y, y);
     }
 
-    const faceItem = _.find(faceData, match);
-    if (faceItem) {
+    const faceItem = _.pickBy(faceData, match);
+    if (!_.isEmpty(faceItem)) {
 
         function f(item) {
-            return item.profile==faceItem.p;
+            return item.profile==_.first(_.keys(faceItem));
         }
 
         const profile = _.find(pageProfiles, f);
