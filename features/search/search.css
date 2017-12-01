@@ -29,7 +29,10 @@
     display: inline-block;
 }
 
-#searchPanel a:focus, #searchPanel a:hover {
+#searchPanel a:focus, 
+#searchPanel a:hover,
+#searchPanel a:focus *, 
+#searchPanel a:hover * {
     color: black;
 }
 
@@ -40,4 +43,10 @@
     font-family: monospace;
     color: yellow;
     width: 250px;
+}
+
+#searchPanel li em {
+    font-size: 10px;
+    font-style: normal;
+    color: rgb(162, 203, 247);
 }

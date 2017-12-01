@@ -13,8 +13,6 @@ const profiles = JSON.parse(localStorage.getItem('wikitreeturbo_watchlist'));
 
 function updateUI() {
 
-    console.log(state);
-    
     if (state.searchPanelActive) {
         $('#searchPanel').show();
         $('#searchPanel input').focus();
@@ -28,7 +26,7 @@ function updateUI() {
 function renderMatches(matchedProfiles) {
 
     function f(o) {
-        let li = $(`<li><a href="${o.url}">${o.name}</a></li>`);
+        let li = $(`<li><a href="${o.url}">${o.name}<br><em>${o.born}</em></a></li>`);
         $('#searchPanel ul').append(li);
     }
 
@@ -62,7 +60,7 @@ function createSearchPanel() {
         <ul></ul>
         <p>TAB - next<br>
         SHIFT+TAB - back<br>
-        ENTER - open<br>
+        ENTER - select<br>
         BACKQUOTE (\`) - close</p>
     </div>
 `);
