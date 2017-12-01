@@ -72,7 +72,7 @@ function onProfileClick(e) {
     }
 
     name = e.target.innerText;
-    profile = e.target.href.match(/\w+\-\d+.*$/)[0];
+    profile = e.target.href.match(/\w+\-\d+.*$/)[0];    // TODO: this fails on last name with space
     update();
     e.preventDefault();
 }

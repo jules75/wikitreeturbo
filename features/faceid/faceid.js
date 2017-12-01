@@ -29,7 +29,7 @@ function getProfiles() {
             target: el,
             href: el.href,
             name: el.innerText,
-            profile: el.href.match(/\w+\-\d+.*$/)[0]
+            profile: el.href.match(/\w+\-\d+.*$/)[0]     // TODO: this fails on last name with space
         };
     });
 }
