@@ -40,6 +40,17 @@
       "matches": [
         "https://*.wikitree.com/*"
       ]
+    },
+    {
+      "css": [
+        "features/search/search.css"
+      ],
+      "js": [
+        "features/search/search.js"
+      ],
+      "matches": [
+        "https://*.wikitree.com/*"
+      ]
     }
   ]
 }
