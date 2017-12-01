@@ -50,3 +50,7 @@
     font-style: normal;
     color: rgb(162, 203, 247);
 }
+
+#searchPanel li.selected {
+    outline: 1px solid red;
+}
