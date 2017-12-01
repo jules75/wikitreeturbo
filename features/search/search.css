@@ -32,3 +32,12 @@
 #searchPanel a:focus, #searchPanel a:hover {
     color: black;
 }
+
+#searchPanel p {
+    position: fixed;
+    bottom: 0;
+    text-align: right;
+    font-family: monospace;
+    color: yellow;
+    width: 250px;
+}

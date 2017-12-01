@@ -60,6 +60,10 @@ function createSearchPanel() {
     <div id="searchPanel">
         <input type="text" placeholder="Start typing..." />
         <ul></ul>
+        <p>TAB - next<br>
+        SHIFT+TAB - back<br>
+        ENTER - open<br>
+        BACKQUOTE (\`) - close</p>
     </div>
 `);
     $('body').append(div);
