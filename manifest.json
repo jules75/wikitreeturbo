@@ -51,6 +51,14 @@
       "matches": [
         "https://*.wikitree.com/*"
       ]
+    },
+    {
+      "js": [
+        "features/search/scrape.js"
+      ],
+      "matches": [
+        "https://*.wikitree.com/*title=Special:WatchedList*"
+      ]
     }
   ]
 }
