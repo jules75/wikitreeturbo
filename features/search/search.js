@@ -3,15 +3,30 @@
  */
 
 
-// let state = { searchPanelOpen: false };
-// let elements = { searchPanel: null };
+let state = {
+    searchPanelActive: false
+};
 
 
 const profiles = JSON.parse(localStorage.getItem('wikitreeturbo_watchlist'));
 
 
-function renderMatches(matchedProfiles) {
+function updateUI() {
+
+    console.log(state);
     
+    if (state.searchPanelActive) {
+        $('#searchPanel').show();
+        $('#searchPanel input').focus();
+    } else {
+        $('#searchPanel').hide();
+    }
+
+}
+
+
+function renderMatches(matchedProfiles) {
+
     function f(o) {
         let li = $(`<li><a href="${o.url}">${o.name}</a></li>`);
         $('#searchPanel ul').append(li);
@@ -52,14 +67,13 @@ function createSearchPanel() {
 
 
 function onKeyPress(e) {
-    
-    if (e.originalEvent.code !== 'Backquote') {
-        return;
+
+    if (e.originalEvent.code == 'Backquote') {
+        state.searchPanelActive = !state.searchPanelActive;
+        updateUI();
+        e.preventDefault();
     }
 
-    $('#searchPanel').toggle();
-    $('#searchPanel input').focus();
-    e.preventDefault();
 }
 
 
