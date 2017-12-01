@@ -124,4 +124,4 @@ createSearchPanel();
 
 $('#searchPanel input').on('input', onInputChange);
 $('body').keypress(onBackquote);
-$('#searchPanel').keypress(onArrowOrEnter);
+$('#searchPanel').keyup(onArrowOrEnter);
