@@ -59,7 +59,7 @@ function createSearchPanel() {
         <ul></ul>
         <p>ARROW UP/DOWN to select<br>
         ENTER to open<br>
-        BACKQUOTE (\`) to close</p>
+        ESC or BACKQUOTE (\`) to close</p>
     </div>
 `);
     $('body').append(div);
@@ -105,6 +105,10 @@ function onArrowOrEnter(e) {
 
     else if (code == 'Enter') {
         state.triggerSelection = true;
+    }
+
+    else if (code == 'Escape') {
+        state.searchPanelActive = false;
     }
 
     updateUI();    
