@@ -5,7 +5,6 @@
 
 let state = {
     searchPanelActive: false,
-    resultCount: 0,
     selectedResultIndex: 0,
     triggerSelection: false
 };
@@ -78,9 +77,7 @@ function onInputChange(e) {
 
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
-    const results = _.pickBy(profiles, f);
-    state.resultCount = _.size(results);
-    renderMatches(results);
+    renderMatches(_.pickBy(profiles, f));
 }
 
 
@@ -101,21 +98,17 @@ function onArrowOrEnter(e) {
     if (code == 'ArrowDown') {
         state.selectedResultIndex++;
     }
+
     else if (code == 'ArrowUp') {
         state.selectedResultIndex--;
     }
+
     else if (code == 'Enter') {
         state.triggerSelection = true;
     }
+
     else if (code == 'Escape') {
         state.searchPanelActive = false;
-    }
-
-    if (state.selectedResultIndex < 0) {
-        state.selectedResultIndex = state.resultCount-1;
-    }
-    else if (state.selectedResultIndex >= state.resultCount) {
-        state.selectedResultIndex = 0;
     }
 
     updateUI();    
