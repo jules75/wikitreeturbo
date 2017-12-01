@@ -4,16 +4,27 @@
 
 
 function build(result, value, key) {
-    const profile = value.href.match(/wiki\/(.*)$/)[1];
-    result[profile] = { 'name': value.innerText, 'url': value.href };
+
+    const td1 = $(value).children().eq(0);
+    const link = $(td1).children('a')[0];
+
+    const td2 = $(value).children().eq(1)[0];
+    const profile = link.href.match(/wiki\/(.*)$/)[1];
+
+    result[profile] = {
+        'name': link.innerText,
+        'url': link.href,
+        'born': td2.innerText
+    };
+
     return result;
 }
 
 
 console.log('WikiTreeTurbo: reading profile data from this page');
 
-const links = $('table tr td:first-child a:first-child');
-const result = _.reduce(links, build, {});
+const rows = _.drop($('table tr'), 1);
+const result = _.reduce(rows, build, {});
 localStorage.setItem('wikitreeturbo_watchlist', JSON.stringify(result));
 
 console.log('WikiTreeTurbo: watchlist data saved to localstorage');
