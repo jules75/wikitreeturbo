@@ -6,6 +6,7 @@
 let state = {
     searchPanelActive: false,
     selectedResultIndex: 0,
+    resultCount: 0,
     triggerSelection: false
 };
 
@@ -77,7 +78,8 @@ function onInputChange(e) {
 
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
-    const result = (s.length>0) ? _.pickBy(profiles, f) : {}; 
+    const result = (s.length>0) ? _.pickBy(profiles, f) : {};
+    state.resultCount = _.size(result);
     renderMatches(result);
 }
 
@@ -110,6 +112,13 @@ function onArrowOrEnter(e) {
 
     else if (code == 'Escape') {
         state.searchPanelActive = false;
+    }
+
+    if (state.selectedResultIndex < 0) {
+        state.selectedResultIndex = state.resultCount-1;
+    } 
+    else if (state.selectedResultIndex == state.resultCount) {
+        state.selectedResultIndex = 0;
     }
 
     updateUI();    
