@@ -54,3 +54,11 @@
 #searchPanel li.selected {
     outline: 1px solid red;
 }
+
+#searchPanel div {
+    color: white;
+}
+#searchPanel div a {
+    color: white;
+    text-decoration: underline;
+}

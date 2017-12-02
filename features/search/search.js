@@ -16,6 +16,10 @@ const profiles = JSON.parse(localStorage.getItem('wikitreeturbo_watchlist'));
 
 function updateUI() {
 
+    if (_.isEmpty(profiles)) {
+        $('#searchPanel div').show();
+    }
+
     // show/hide panel
     if (state.searchPanelActive) {
         $('#searchPanel').slideDown(100);
@@ -26,11 +30,11 @@ function updateUI() {
 
     // highlight a result
     $('#searchPanel ul li').removeClass('selected');
-    $(`#searchPanel ul li:nth-child(${state.selectedResultIndex+1})`).addClass('selected');
+    $(`#searchPanel ul li:nth-child(${state.selectedResultIndex + 1})`).addClass('selected');
 
     // select result
     if (state.triggerSelection) {
-        $(`#searchPanel ul li:nth-child(${state.selectedResultIndex+1}) a`)[0].click();
+        $(`#searchPanel ul li:nth-child(${state.selectedResultIndex + 1}) a`)[0].click();
     }
 
 }
@@ -58,6 +62,12 @@ function createSearchPanel() {
     <div id="searchPanel">
         <input type="text" placeholder="Start typing..." />
         <ul></ul>
+        <div style="display:none;">Welcome to quick search!<br><br>
+            To get it working, you must first 
+            <a href="/index.php?title=Special:WatchedList">open your watchlist page</a>.<br><br>
+            After you've done that, reload any WikiTree page, then quick search will work.<br><br>
+            Be sure to visit your watchlist page occasionally to keep quick search up to date.
+            </div>
         <p>ARROW UP/DOWN to select<br>
         ENTER to open<br>
         ESC or BACKQUOTE (\`) to close</p>
@@ -69,16 +79,12 @@ function createSearchPanel() {
 
 function onInputChange(e) {
 
-    state.selectedResultIndex = 0;    
-
-    if (profiles == null) {
-        alert('No watchlist data found. Please visit your watchlist page, then try again.');
-        return;
-    }
+    state.selectedResultIndex = 0;
 
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
-    const result = (s.length>0) ? _.pickBy(profiles, f) : {};
+    const result = (s.length > 0) ? _.pickBy(profiles, f) : {};
+
     state.resultCount = _.size(result);
     renderMatches(result);
 }
@@ -90,7 +96,7 @@ function onBackquote(e) {
         state.searchPanelActive = !state.searchPanelActive;
         updateUI();
         e.preventDefault();
-    }  
+    }
 }
 
 
@@ -101,32 +107,24 @@ function onArrowOrEnter(e) {
     if (code == 'ArrowDown') {
         state.selectedResultIndex++;
     }
-
     else if (code == 'ArrowUp') {
         state.selectedResultIndex--;
     }
-
     else if (code == 'Enter') {
         state.triggerSelection = true;
     }
-
     else if (code == 'Escape') {
         state.searchPanelActive = false;
     }
 
     if (state.selectedResultIndex < 0) {
-        state.selectedResultIndex = state.resultCount-1;
-    } 
+        state.selectedResultIndex = state.resultCount - 1;
+    }
     else if (state.selectedResultIndex == state.resultCount) {
         state.selectedResultIndex = 0;
     }
 
-    updateUI();    
-}
-
-
-function onEnter(e) {
-    console.log('enter');
+    updateUI();
 }
 
 
