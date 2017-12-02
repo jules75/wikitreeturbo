@@ -77,7 +77,8 @@ function onInputChange(e) {
 
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
-    renderMatches(_.pickBy(profiles, f));
+    const result = (s.length>0) ? _.pickBy(profiles, f) : {}; 
+    renderMatches(result);
 }
 
 
