@@ -17,10 +17,10 @@ function updateUI() {
 
     // show/hide panel
     if (state.searchPanelActive) {
-        $('#searchPanel').show();
+        $('#searchPanel').slideDown(100);
         $('#searchPanel input').focus();
     } else {
-        $('#searchPanel').hide();
+        $('#searchPanel').slideUp(100);
     }
 
     // highlight a result
