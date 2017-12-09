@@ -92,7 +92,7 @@ function onInputChange(e) {
 
 // separate fn to supress keypress
 function onBackquote(e) {
-    if (e.originalEvent.code == 'Backquote') {
+    if (e.originalEvent.code == 'Backquote' && e.originalEvent.shiftKey == false) {
         state.searchPanelActive = !state.searchPanelActive;
         updateUI();
         e.preventDefault();
