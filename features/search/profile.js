@@ -3,23 +3,27 @@
  */
 
 
-const key = 'wikitreeturbo_watchlist';
-const s = localStorage.getItem(key);
-const profile = location.href.match(/wiki\/(.*)$/)[1]
-const name = $('h1 span[itemprop="name"]').text();
+if ($('body.profile').length > 0) { // avoid getting non-profile wiki pages
 
-let profs = JSON.parse(s) || {};
+    const key = 'wikitreeturbo_watchlist';
+    const s = localStorage.getItem(key);
+    const profile = location.href.match(/wiki\/(.*)$/)[1]
+    const name = $('h1 span[itemprop="name"]').text();
 
-const profileAlreadyExists = Boolean(profs[profile]);
+    let profs = JSON.parse(s) || {};
 
-profs[profile] = {
-    'name': name,
-    'url': location.href,
-    'born': $('time[itemprop="birthDate"]').text()
-};
+    const profileAlreadyExists = Boolean(profs[profile]);
 
-localStorage.setItem(key, JSON.stringify(profs));
+    profs[profile] = {
+        'name': name,
+        'url': location.href,
+        'born': $('time[itemprop="birthDate"]').text()
+    };
 
-if (!profileAlreadyExists) {
-    toast(name + " added to quick search index");
+    localStorage.setItem(key, JSON.stringify(profs));
+
+    if (!profileAlreadyExists) {
+        toast(name + " added to quick search index");
+    }
+
 }
