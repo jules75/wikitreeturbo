@@ -65,7 +65,8 @@ function createSearchPanel() {
         <div style="display:none;">Welcome to quick search!<br><br>
             To get it working, you must first 
             <a href="/index.php?title=Special:WatchedList">open your watchlist page</a>.<br><br>
-            After you've done that, reload any WikiTree page, then quick search will work.<br><br>
+            After you've done that, reload any WikiTree page, and quick search will work.<br><br>
+            Any profile you visit that is NOT in your watchlist is also added to the quick search index.<br><br>
             Be sure to visit your watchlist page occasionally to keep quick search up to date.
             </div>
         <p>ARROW UP/DOWN to select<br>
