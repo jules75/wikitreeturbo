@@ -3,7 +3,7 @@
  */
 
 
-let state = {
+let searchState = {
     searchPanelActive: false,
     selectedResultIndex: 0,
     resultCount: 0,
@@ -21,7 +21,7 @@ function updateUI() {
     }
 
     // show/hide panel
-    if (state.searchPanelActive) {
+    if (searchState.searchPanelActive) {
         $('#searchPanel').slideDown(100);
         $('#searchPanel input').focus();
     } else {
@@ -30,11 +30,11 @@ function updateUI() {
 
     // highlight a result
     $('#searchPanel ul li').removeClass('selected');
-    $(`#searchPanel ul li:nth-child(${state.selectedResultIndex + 1})`).addClass('selected');
+    $(`#searchPanel ul li:nth-child(${searchState.selectedResultIndex + 1})`).addClass('selected');
 
     // select result
-    if (state.triggerSelection) {
-        $(`#searchPanel ul li:nth-child(${state.selectedResultIndex + 1}) a`)[0].click();
+    if (searchState.triggerSelection) {
+        $(`#searchPanel ul li:nth-child(${searchState.selectedResultIndex + 1}) a`)[0].click();
     }
 
 }
@@ -80,13 +80,13 @@ function createSearchPanel() {
 
 function onInputChange(e) {
 
-    state.selectedResultIndex = 0;
+    searchState.selectedResultIndex = 0;
 
     const s = $('#searchPanel input').val();
     const f = _.partial(isMatch, s);
     const result = (s.length > 0) ? _.pickBy(profiles, f) : {};
 
-    state.resultCount = _.size(result);
+    searchState.resultCount = _.size(result);
     renderMatches(result);
 }
 
@@ -94,7 +94,7 @@ function onInputChange(e) {
 // separate fn to supress keypress
 function onBackquote(e) {
     if (e.originalEvent.code == 'Backquote' && e.originalEvent.shiftKey == false) {
-        state.searchPanelActive = !state.searchPanelActive;
+        searchState.searchPanelActive = !searchState.searchPanelActive;
         updateUI();
         e.preventDefault();
     }
@@ -106,23 +106,23 @@ function onArrowOrEnter(e) {
     code = e.originalEvent.code;
 
     if (code == 'ArrowDown') {
-        state.selectedResultIndex++;
+        searchState.selectedResultIndex++;
     }
     else if (code == 'ArrowUp') {
-        state.selectedResultIndex--;
+        searchState.selectedResultIndex--;
     }
     else if (code == 'Enter') {
-        state.triggerSelection = true;
+        searchState.triggerSelection = true;
     }
     else if (code == 'Escape') {
-        state.searchPanelActive = false;
+        searchState.searchPanelActive = false;
     }
 
-    if (state.selectedResultIndex < 0) {
-        state.selectedResultIndex = state.resultCount - 1;
+    if (searchState.selectedResultIndex < 0) {
+        searchState.selectedResultIndex = searchState.resultCount - 1;
     }
-    else if (state.selectedResultIndex == state.resultCount) {
-        state.selectedResultIndex = 0;
+    else if (searchState.selectedResultIndex == searchState.resultCount) {
+        searchState.selectedResultIndex = 0;
     }
 
     updateUI();
