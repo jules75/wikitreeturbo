@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "WikiTreeTurbo",
   "description": "Additional features for WikiTree genealogy site.",
-  "version": "0.4",
+  "version": "0.5",
   "author": "julianlaffey@gmail.com",
   "icons": {
     "16": "img/icon_16.png",
@@ -54,7 +54,7 @@
     },
     {
       "css": [
-        "common/common.css"
+        "common/toastr.css"
       ],      
       "js": [
         "common/common.js",
@@ -66,7 +66,7 @@
     },
     {
       "css": [
-        "common/common.css"
+        "common/toastr.css"
       ],      
       "js": [
         "common/common.js",
