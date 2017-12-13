@@ -21,10 +21,12 @@ function build(result, value, key) {
 }
 
 
-console.log('WikiTreeTurbo: reading profile data from this page');
-
+const key = 'wikitreeturbo_watchlist';
 const rows = _.drop($('table tr'), 1);
-const result = _.reduce(rows, build, {});
-localStorage.setItem('wikitreeturbo_watchlist', JSON.stringify(result));
+const s = localStorage.getItem(key);
+const profs = JSON.parse(s) || {};
+const result = _.reduce(rows, build, profs);
 
-console.log('WikiTreeTurbo: watchlist data saved to localstorage');
+localStorage.setItem(key, JSON.stringify(result));
+
+toast(_.size(result) + " profiles added to quick search index");

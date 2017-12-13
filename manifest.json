@@ -53,7 +53,11 @@
       ]
     },
     {
+      "css": [
+        "common/common.css"
+      ],      
       "js": [
+        "common/common.js",
         "features/search/scrape.js"
       ],
       "matches": [
