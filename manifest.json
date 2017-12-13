@@ -58,7 +58,6 @@
       ],      
       "js": [
         "common/common.js",
-        "features/search/scrape.js",
         "features/search/watchlist.js"
       ],
       "matches": [
@@ -71,7 +70,6 @@
       ],      
       "js": [
         "common/common.js",
-        "features/search/scrape.js",
         "features/search/profile.js"
       ],
       "matches": [
