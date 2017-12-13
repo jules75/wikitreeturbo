@@ -64,6 +64,19 @@
       "matches": [
         "https://*.wikitree.com/*title=Special:WatchedList*"
       ]
-    }
+    },
+    {
+      "css": [
+        "common/common.css"
+      ],      
+      "js": [
+        "common/common.js",
+        "features/search/scrape.js",
+        "features/search/profile.js"
+      ],
+      "matches": [
+        "https://*.wikitree.com/wiki/*"
+      ]
+    }    
   ]
 }
