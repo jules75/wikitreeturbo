@@ -52,7 +52,7 @@
         "https://*.wikitree.com/*"
       ],
       "exclude_matches": [
-        "https://*.wikitree.com/photo/*"  // search causes photo tagging to fail, could not isolate bug so will exclude instead
+        "https://*.wikitree.com/photo/*"
       ]
     },
     {
