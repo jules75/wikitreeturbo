@@ -58,6 +58,7 @@ function isMatch(s, o) {
 
 
 function createSearchPanel() {
+    
     let div = $(`
     <div id="searchPanel">
         <input type="text" placeholder="Start typing..." />
@@ -93,7 +94,8 @@ function onInputChange(e) {
 
 // separate fn to supress keypress
 function onBackquote(e) {
-    if (e.originalEvent.code == 'Backquote' && e.originalEvent.shiftKey == false) {
+    const backquote = '`';
+    if (e.originalEvent.key == backquote && e.originalEvent.shiftKey == false) {
         searchState.searchPanelActive = !searchState.searchPanelActive;
         updateUI();
         e.preventDefault();
