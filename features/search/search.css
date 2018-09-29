@@ -62,3 +62,17 @@
     color: white;
     text-decoration: underline;
 }
+
+button#wttSearch {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 0.25;
+    text-transform: capitalize;
+    padding: 10px;
+    font-size: 10pt;
+}
+    button#wttSearch:hover {
+        opacity: 1;
+    }

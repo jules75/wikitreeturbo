@@ -79,6 +79,12 @@ function createSearchPanel() {
 }
 
 
+function createSearchButton() {
+    const html = `<button id="wttSearch">Quick search</button>`;
+    $('body').prepend($(html));
+}
+
+
 function onInputChange(e) {
 
     searchState.selectedResultIndex = 0;
@@ -92,12 +98,17 @@ function onInputChange(e) {
 }
 
 
+function onSearch() {
+    searchState.searchPanelActive = !searchState.searchPanelActive;
+    updateUI();
+}
+
+
 // separate fn to supress keypress
-function onBackquote(e) {
+function onKeypress(e) {
     const backquote = '`';
     if (e.originalEvent.key == backquote && e.originalEvent.shiftKey == false) {
-        searchState.searchPanelActive = !searchState.searchPanelActive;
-        updateUI();
+        onSearch();
         e.preventDefault();
     }
 }
@@ -132,7 +143,9 @@ function onArrowOrEnter(e) {
 
 
 createSearchPanel();
+createSearchButton();
 
 $('#searchPanel input').on('input', onInputChange);
-$('body').keypress(onBackquote);
+$('body').keypress(onKeypress);
 $('#searchPanel').keyup(onArrowOrEnter);
+$('button#wttSearch').click(onSearch);
