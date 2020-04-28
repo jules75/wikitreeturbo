@@ -23,7 +23,7 @@ function nearly(n, m) {
 
 // return all profile data found in current page
 function getProfiles() {
-    const sel = '[itemtype="https://schema.org/Person"] a';
+    const sel = 'span[itemtype="https://schema.org/Person"] a';
     return _.map($(sel), function (el) {
         return {
             target: el,
@@ -49,7 +49,7 @@ function isWikiTreeTurboJSON(element) {
 
 // returns all comments in current page that contain WTT JSON
 function getWikiTreeTurboComments() {
-    const divs = $('[itemprop="commentText"]');
+    const divs = $('.comment-body');
     return _.filter(_.toArray(divs), isWikiTreeTurboJSON);
 }
 

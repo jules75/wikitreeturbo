@@ -3,9 +3,9 @@
  */
 
 
-var state = { isEditing: false, faceIdObject: {} };
-var profile, name, x, y;
-var elements = { tagButton: null, profileMessage: null, photoMessage: null };
+let state = { isEditing: false, faceIdObject: {} };
+let profile, name, x, y;
+let elements = { tagButton: null, profileMessage: null, photoMessage: null };
 
 
 function resetUserSelection() {
@@ -42,8 +42,9 @@ function updateUI() {
     else {
         if (!_.isEmpty(state.faceIdObject)) {
             $(elements.tagButton).hide();
-            $('textarea').text(wrap(state.faceIdObject));       // populate textarea
-            $('input[value="Save Comment"]').trigger('click');  // submit form
+            $('button[id="postNewCommentButton"]').click()  // reveal textarea
+            $('textarea').text(wrap(state.faceIdObject));   // populate textarea
+            $('button[data-action="postSubmit"]').click();  // submit form
         }
     }
 
@@ -79,8 +80,8 @@ function onProfileClick(e) {
 
 
 function onImageClick(e) {
-    x1 = e.originalEvent.offsetX / e.target.width * 100;
-    y1 = e.originalEvent.offsetY / e.target.height * 100;
+    const x1 = e.originalEvent.offsetX / e.target.width * 100;
+    const y1 = e.originalEvent.offsetY / e.target.height * 100;
     x = Number(x1.toFixed(2));
     y = Number(y1.toFixed(2));
     update();
@@ -100,7 +101,7 @@ function toggleEditing(e) {
 
 
 function createListeners() {
-    $('[itemtype="https://schema.org/Person"] a').click(onProfileClick);
+    $('span[itemtype="https://schema.org/Person"] a').click(onProfileClick);
     $("img[itemprop='image']").click(onImageClick);
 }
 
