@@ -45,6 +45,9 @@ function updateUI() {
             $('button[id="postNewCommentButton"]').click()  // reveal textarea
             $('textarea').text(wrap(state.faceIdObject));   // populate textarea
             $('button[data-action="postSubmit"]').click();  // submit form
+
+            // reload page after 5 seconds, this ensures hover tags work
+            setTimeout(function() { location.reload(); }, 5000);
         }
     }
 
